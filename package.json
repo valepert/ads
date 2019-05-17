@@ -1,0 +1,34 @@
+{
+  "name": "ads",
+  "version": "0.1.0",
+  "description": "Algorithms and Data Structures",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx jest test --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valepert/ads.git"
+  },
+  "keywords": [
+    "ads"
+  ],
+  "author": "valepert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valepert/ads/issues"
+  },
+  "homepage": "https://github.com/valepert/ads#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^24.8.0"
+  },
+  "dependencies": {
+    "ramda": "^0.26.1"
+  }
+}
