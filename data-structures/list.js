@@ -11,6 +11,8 @@ const LENGTH = (ds) => ds.length
 const FIND = (x, ds) => ds.indexOf(x) >= 0 ? ds.indexOf(x) : null
 const APPEND = (x, ds) => ds.push(x)
 const REMOVE = (x, ds) => FIND(x, ds) ? ds.splice(FIND(x, ds), 1) : false
+const HEAD = (ds) => ds[0] || null
+const TAIL = (ds) => ds[LENGTH(ds) - 1] || null
 
 const List = () => {
   let datastore = EMPTY()
@@ -33,8 +35,8 @@ const List = () => {
     current: () => position,
 
     get: () => datastore[position] || null,
-    head: () => datastore[0] || null,
-    tail: () => datastore[LENGTH(datastore) - 1] || null
+    head: () => HEAD(datastore),
+    tail: () => TAIL(datastore)
   })
   return l
 }

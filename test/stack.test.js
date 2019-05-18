@@ -5,7 +5,7 @@ const { Stack } = require('..')
 
 const ITEMS = [`item${ZERO}`, `item${ONE}`, `item${TWO}`]
 
-const populate = (l, elements) => R.map(l.push)(elements)
+const populate = (s, elements) => R.map(s.push)(elements)
 
 describe('Stack', () => {
   test('push / peek', () => {
