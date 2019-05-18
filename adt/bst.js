@@ -12,6 +12,12 @@ function ADTBST (methods) {
 
   // -> List[Node.data]
   this.inOrder = methods.inOrder
+  this.preOrder = methods.preOrder
+  this.postOrder = methods.postOrder
+
+  // -> Node.data || Null
+  this.min = methods.min
+  this.max = methods.max
 }
 
 module.exports = {

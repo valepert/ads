@@ -27,7 +27,7 @@ const INSERT = (data, root) => {
   return root ? INSERTION(root, leaf) : leaf
 }
 
-function INORDER (node, output) {
+const INORDER = (node, output) => {
   if (node) {
     INORDER(node.left, output)
     output.push(node.data)
@@ -36,12 +36,37 @@ function INORDER (node, output) {
   }
 }
 
+const PREORDER = (node, output) => {
+  if (node) {
+    output.push(node.data)
+    PREORDER(node.left, output)
+    PREORDER(node.right, output)
+    return output
+  }
+}
+
+const POSTORDER = (node, output) => {
+  if (node) {
+    POSTORDER(node.left, output)
+    POSTORDER(node.right, output)
+    output.push(node.data)
+    return output
+  }
+}
+
+const MIN = (node) => node.left ? MIN(node.left) : node.data
+const MAX = (node) => node.right ? MAX(node.right) : node.data
+
 const BST = () => {
   let root = null
   const t = new ADTBST({
     root: () => root,
     insert: (x) => { root = INSERT(x, root) },
-    inOrder: () => INORDER(root, [])
+    inOrder: () => INORDER(root, []),
+    preOrder: () => PREORDER(root, []),
+    postOrder: () => POSTORDER(root, []),
+    min: () => root ? MIN(root) : null,
+    max: () => root ? MAX(root) : null
   })
   return t
 }
