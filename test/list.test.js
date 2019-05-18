@@ -1,7 +1,7 @@
 /* global describe, expect, test */
 const R = require('ramda')
 const { ZERO, ONE, TWO, THREE } = require('./const')
-const { List } = require('../data-structures/list')
+const { List } = require('..')
 
 const ITEMS = [`item${ZERO}`, `item${ONE}`, `item${TWO}`]
 const ITEMS_STRING = ITEMS.toString() // 'item0,item1,item2'
@@ -13,9 +13,9 @@ describe('List', () => {
   test('emptiness', () => {
     const emptyList = List()
 
-    expect(emptyList.isEmpty()).toBe(R.T())
+    expect(emptyList.empty()).toBe(R.T())
     expect(emptyList.size()).toBe(ZERO)
-    expect(emptyList.toString()).toBe(EMPTY_STRING)
+    expect(emptyList.print()).toBe(EMPTY_STRING)
     expect(emptyList.get()).toBeNull()
   })
 
@@ -24,7 +24,7 @@ describe('List', () => {
 
     // [0]
     list.append(ITEMS[ZERO])
-    expect(list.isEmpty()).toBe(R.F())
+    expect(list.empty()).toBe(R.F())
     expect(list.size()).toBe(ONE)
     expect(list.get()).toBe(ITEMS[ZERO])
 
@@ -32,23 +32,27 @@ describe('List', () => {
     list.append(ITEMS[ONE])
     list.append(ITEMS[TWO])
 
-    expect(list.isEmpty()).toBe(R.F())
+    expect(list.empty()).toBe(R.F())
     expect(list.size()).toBe(THREE)
-    expect(list.toString()).toBe(ITEMS_STRING)
+    expect(list.print()).toBe(ITEMS_STRING)
   })
 
   test('clear', () => {
     const list = List()
-    expect(list.isEmpty()).toBe(R.T())
+    expect(list.empty()).toBe(R.T())
     expect(list.get()).toBeNull()
+    expect(list.current()).toBe(ZERO)
 
     populate(list, ITEMS)
-    expect(list.isEmpty()).toBe(R.F())
+    expect(list.empty()).toBe(R.F())
     expect(list.get()).toBe(ITEMS[ZERO])
+    list.next()
+    expect(list.current()).toBe(ONE)
 
     list.clear()
-    expect(list.isEmpty()).toBe(R.T())
+    expect(list.empty()).toBe(R.T())
     expect(list.get()).toBeNull()
+    expect(list.current()).toBe(ZERO)
   })
 
   test('traverse elements', () => {
@@ -107,5 +111,21 @@ describe('List', () => {
 
     expect(list.head()).toBe(ITEMS[ZERO])
     expect(list.tail()).toBe(ITEMS[TWO])
+  })
+
+  test('find / contains / remove', () => {
+    const list = List()
+    populate(list, ITEMS)
+
+    expect(list.find(EMPTY_STRING)).toBeNull()
+    expect(list.size()).toBe(THREE)
+
+    expect(list.contains(ITEMS[ONE])).toBe(R.T())
+    expect(list.find(ITEMS[ONE])).toBe(ONE)
+
+    list.remove(ITEMS[ONE])
+    expect(list.contains(ITEMS[ONE])).toBe(R.F())
+    expect(list.find(ITEMS[ONE])).toBeNull()
+    expect(list.size()).toBe(TWO)
   })
 })
