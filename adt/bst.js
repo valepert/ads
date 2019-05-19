@@ -18,6 +18,8 @@ function ADTBST (methods) {
   // -> Node.data || Null
   this.min = methods.min
   this.max = methods.max
+  // data -> Boolean
+  this.find = methods.find
 }
 
 module.exports = {

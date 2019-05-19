@@ -2,9 +2,8 @@ const { Node, ADTBST } = require('../adt/bst')
 
 const INSERTION = (root, node) => {
   let current = root
-  let parent
   while (true) {
-    parent = current
+    let parent = current
     if (node.data < current.data) {
       current = current.left
       if (current == null) {
@@ -57,6 +56,16 @@ const POSTORDER = (node, output) => {
 const MIN = (node) => node.left ? MIN(node.left) : node.data
 const MAX = (node) => node.right ? MAX(node.right) : node.data
 
+const FIND = (data, node) => {
+  return node
+    ? (
+      node.data === data
+        ? true
+        : (data < node.data ? FIND(data, node.left) : FIND(data, node.right))
+    )
+    : false
+}
+
 const BST = () => {
   let root = null
   const t = new ADTBST({
@@ -66,7 +75,8 @@ const BST = () => {
     preOrder: () => PREORDER(root, []),
     postOrder: () => POSTORDER(root, []),
     min: () => root ? MIN(root) : null,
-    max: () => root ? MAX(root) : null
+    max: () => root ? MAX(root) : null,
+    find: (x) => FIND(x, root)
   })
   return t
 }

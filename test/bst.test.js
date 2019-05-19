@@ -27,16 +27,16 @@ describe('Binary Search Trees', () => {
 
   test.each([[array, preorder]])('preOrder', (items, expected) => {
     const tree = BST()
-
     populate(tree, items)
+
     expect(tree.root().data).toBe(items[0])
     expect(tree.preOrder()).toEqual(expected)
   })
 
   test.each([[array, postorder]])('postOrder', (items, expected) => {
     const tree = BST()
-
     populate(tree, items)
+
     expect(tree.root().data).toBe(items[0])
     expect(tree.postOrder()).toEqual(expected)
   })
@@ -48,9 +48,25 @@ describe('Binary Search Trees', () => {
   ]
   )('min / max (%p)', (items, expmin, expmax) => {
     const tree = BST()
-
     populate(tree, items)
+
     expect(tree.min()).toBe(expmin)
     expect(tree.max()).toBe(expmax)
+  })
+
+  test.each([
+    [1, array, false],
+    [3, array, true],
+    [15, array, false],
+    [23, array, true],
+    [42, array, false],
+    [99, array, true],
+    ['tree', dict, true],
+    ['hello', dict, false]
+  ])('find %p in %p: %p', (value, items, expected) => {
+    const tree = BST()
+    populate(tree, items)
+
+    expect(tree.find(value)).toBe(expected)
   })
 })
